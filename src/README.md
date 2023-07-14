@@ -4,7 +4,7 @@ Não esqueça de dar uma estrela ao repositório para mostrar seu apoio e reconh
 
 ---
 
-Para pedidos e sugestões, poderá usar a aba isses, neste repositório, ou me enviar um e-mail neste endereço:
+Para pedidos e sugestões, poderá usar a aba issues, neste repositório, ou me enviar um e-mail neste endereço:
 
 filipe@filipeteixeira.com.br
 
