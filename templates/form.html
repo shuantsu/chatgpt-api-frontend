@@ -79,7 +79,7 @@ button {cursor:pointer;}
     </select>
   </div>
   
-  <input type="submit" value="Enviar (CTRL+ENTER)" class="btn-submit" />
+  <input type="submit" value="Enviar (CTRL+ENTER)" class="btn-submit" id="btn-submit" />
 </form>
 
 <div id="loading">
@@ -94,21 +94,20 @@ document.getElementById('loading').style.display = 'none';
 
 textarea.focus();
 
-function loader() {
+function loader(ev) {
     const l = document.getElementById('loading');
     l.style.display = 'flex';
     l.focus();
     document.body.onclick = () => false;
+    form.submit();
+    textarea.disabled = true;
 }
 
-// Adicionando o ouvinte de eventos no textarea
-textarea.onkeydown = function(event) {
-  // Verificando se a combinação de teclas "Ctrl+Enter" foi pressionada
-  if (event.ctrlKey && event.keyCode === 13) {
-    // Acionando o submit do formulário
-    form.submit();
-    loader();
-    textarea.disabled = true;
+document.getElementById('btn-submit').onclick = (ev) => loader(ev);
+
+textarea.onkeydown = function(ev) {
+  if (ev.ctrlKey && ev.keyCode === 13) {
+    loader(ev)
   }
 };
 </script>
