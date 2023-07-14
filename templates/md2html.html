@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Renderizador de Markdown</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/base16/dracula.css">
+    <script src="{{ url_for('static', filename='highlight.min.js') }}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>*{box-sizing:border-box;}</style>
+    
+</head>
+<body class="markdown-body" style="padding:12px!important;min-height:100vh">
+    Prompt:<br/>
+    
+    <textarea onfocus="this.select()" style="outline:0;border:0;padding:8px;border-radius:4px;width:100%;max-height:160px;">{{ prompt | safe }}</textarea><br/>
+    
+    Tempo decorrido: <strong>{{ elapsed }}s</strong><br/>
+    
+    <hr/>
+    
+    {{ content | safe }}
+</body>
+</html>

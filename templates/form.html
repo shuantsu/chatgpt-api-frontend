@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#loading {
+    position:absolute;
+    right:0;
+    bottom:0;
+    top:0;
+    left:0;
+    background:rgba(255,255,255,.8);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+body {
+  margin: 10px;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  height: calc(100vh - 175px); /* Ajuste a altura conforme necessário */
+}
+button {cursor:pointer;}
+.btn-submit {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-submit:hover {
+  background-color: #0069d9;
+}
+*{box-sizing:border-box;}
+</style>
+</head>
+<body>
+
+<form method="post" action="/app">
+  <div class="form-group">
+    <textarea name="question" id="question" rows="10" placeholder="Digite seu prompt aqui"></textarea>
+  </div>
+  
+  <div class="form-group">
+    <label for="model">Modelo:</label>
+    <select name="model" id="model">
+      <option value="gpt-3.5-turbo" selected>GPT-3.5 Turbo</option>
+      <!-- Adicione outras opções de modelos aqui, se desejar -->
+    </select>
+  </div>
+  
+  <input type="submit" value="Enviar (CTRL+ENTER)" class="btn-submit" />
+</form>
+
+<div id="loading">
+    <img src="{{ url_for('static', filename='spinner.svg') }}"/>
+</div>
+
+<script>
+const textarea = document.querySelector('textarea');
+const form = document.querySelector('form');
+
+document.getElementById('loading').style.display = 'none';
+
+textarea.focus();
+
+function loader() {
+    const l = document.getElementById('loading');
+    l.style.display = 'flex';
+    l.focus();
+    document.body.onclick = () => false;
+}
+
+// Adicionando o ouvinte de eventos no textarea
+textarea.onkeydown = function(event) {
+  // Verificando se a combinação de teclas "Ctrl+Enter" foi pressionada
+  if (event.ctrlKey && event.keyCode === 13) {
+    // Acionando o submit do formulário
+    form.submit();
+    loader();
+    textarea.disabled = true;
+  }
+};
+</script>
+</body>
+</html>
